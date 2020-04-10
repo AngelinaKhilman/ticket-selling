@@ -1,0 +1,64 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+
+    <body class="container">
+        <form method="POST" action="{% url 'passportdata' %}">
+            {% csrf_token %}
+            <p>
+                <label>First name</label><br>
+                <input type="text" name="name" />
+            </p>
+            <p>
+                <label>Last name</label><br>
+                <input type="text" name="second_name" />
+            </p>
+            <p>
+                <label>Date of birth</label><br>
+                <input type="date" name="date_of_birth" />
+            </p>
+            <p>
+                <label>Nationality</label><br>
+                <input type="text" name="nationality" />
+            </p>
+            <p>
+                <label>Passport number</label><br>
+                <input type="text" name="passport_number" />
+            </p>
+            <p>
+                <label>Date of end</label><br>
+                <input type="date" name="date_of_end" />
+            </p>
+            <input type="submit" value="Сохранить" >
+        </form>
+
+    </body>
+
+    <h3>{{msg}}</h3>
+    <h2>List of documents</h2>
+    <table class="table table-striped">
+    <thead>
+    <td>NAME</td>
+    <td>SECOND_NAME</td>
+    <td>DATE_OF_BIRTH</td>
+    <td>NATIONALITY</td>
+    <td>PASSPORT_NUMBER</td>
+    <td>DATE_OF_END</td>
+
+    </thead>
+
+    {% for row in data_list %}
+    <tr>
+        <td>{{row.name}}</td>
+        <td>{{row.second_name}}</td>
+        <td>{{row.date_of_birth}}</td>
+        <td>{{row.nationality}}</td>
+        <td>{{row.passport_number}}</td>
+        <td>{{row.date_of_end}}</td>
+
+
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

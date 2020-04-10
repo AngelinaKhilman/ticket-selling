@@ -1,0 +1,49 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+
+    <body class="container">
+        <form method="POST" action="{% url 'show_my_bus' %}">
+            {% csrf_token %}
+            <p>
+                <label>uniccode</label><br>
+                <input type="text" name="uniccode" />
+            </p>
+
+            <input type="submit" value="Сохранить" >
+        </form>
+
+    </body>
+
+    {% if ticket %}
+
+    <h3>{{msg}}</h3>
+    <h2>bus</h2>
+    <table class="table table-striped">
+    <thead>
+    <td>NAME</td>
+    <td>SOURCE</td>
+    <td>DEST</td>
+    <td>PRICE</td>
+    <td>DATE</td>
+    <td>TIME</td>
+    <td>NOS</td>
+
+    </thead>
+
+    {% for row in ticket %}
+    <tr>
+        <td>{{row.bus_name}}</td>
+        <td>{{row.source}}</td>
+        <td>{{row.dest}}</td>
+        <td>{{row.price}}</td>
+        <td>{{row.date}}</td>
+        <td>{{row.time}}</td>
+        <td>{{row.nos}}</td>
+
+    </tr>
+    {% endfor %}
+        {% endif %}
+</table>
+
+
+{% endblock %}
