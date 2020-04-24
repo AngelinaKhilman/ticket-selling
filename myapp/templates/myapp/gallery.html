@@ -1,0 +1,165 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Bootstrap 4 - Создание адаптивной галереи изображений с помощью сетки</title>
+    <!-- Bootstrap CSS -->
+    <link href="путь_до/bootstrap.min.css" rel="stylesheet">
+    <!-- fancyBox3 CSS -->
+    <link href="путь_до/jquery.fancybox.min.css" rel="stylesheet">
+    <style>
+        .thumb img {
+            -webkit-filter: grayscale(0);
+            filter: none;
+            border-radius: 5px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 5px;
+            width: 190px;
+            height: 130px;
+        }
+
+        .thumb img:hover {
+            -webkit-filter: grayscale(1);
+            filter: grayscale(1);
+        }
+
+        .thumb {
+            padding: 5px;
+        }
+
+    </style>
+</head>
+<body style=" text-align: center">
+
+<h7 style="color: #000000; font-size: 30pt; font-family: Helvetica, sans-serif; padding-top: 20px; margin: auto">
+    Gallery
+</h7>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/1.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/1.jpg' %}" alt="...">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/2.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/2.jpg' %}" alt="...">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/3.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/3.jpg' %}" alt="...">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/4.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/4.jpg' %}" alt="...">
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/5.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/5.jpg' %}" alt="...">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/6.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/6.jpg' %}" alt="...">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/7.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/7.jpg' %}" alt="...">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/8.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/8.jpg' %}" alt="...">
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/9.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/9.jpg' %}" alt="...">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/10.png' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/10.png' %}" alt="...">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/11.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/11.jpg' %}" alt="...">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/12.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/12.jpg' %}" alt="...">
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/13.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/13.jpg' %}" alt="...">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/14.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/14.jpg' %}" alt="...">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/15.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/15.jpg' %}" alt="...">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/16.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/16.jpg' %}" alt="...">
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/17.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/17.jpg' %}" alt="...">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/18.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/18.jpg' %}" alt="...">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/19.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/19.jpg' %}" alt="...">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 thumb">
+            <a data-fancybox="gallery" href="{% static 'mysite/images/20.jpg' %}">
+                <img class="img-fluid" src="{% static 'mysite/images/20.jpg' %}" alt="...">
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="путь_до/jquery-3.2.1.min.js"></script>
+<!-- Popper -->
+<script src="путь_до/popper.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="путь_до/bootstrap.min.js"></script>
+<!-- fancyBox -->
+<script src="путь_до/jquery.fancybox.min.js"></script>
+</body>
+</html>
+{% endblock %}

@@ -7,7 +7,11 @@ from django.contrib.auth import (
 
 User = get_user_model()
 
-
+class OneWayRoundtrip(forms.Form):
+    CHOICES = [('0', '0'),
+               ('1', '1')]
+    owr = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect())
+    print(owr)
 class UserLoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)

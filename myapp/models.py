@@ -39,6 +39,7 @@ class Bus(models.Model):
     date = models.DateField()
     time = models.TimeField()
 
+
     def __str__(self):
         return self.bus_name
 
@@ -52,6 +53,7 @@ class Book(models.Model):
 
     TICKET_STATUSES = ((BOOKED, 'Booked'),
                        (CANCELLED, 'Cancelled'),)
+
     email = models.EmailField()
     name = models.CharField(max_length=30)
     userid =models.DecimalField(decimal_places=0, max_digits=2)
@@ -63,8 +65,13 @@ class Book(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=6)
     date = models.DateField()
     time = models.TimeField()
-    uniccode = models.CharField(max_length=50) #
+    uniccode = models.CharField(max_length=50)
     status = models.CharField(choices=TICKET_STATUSES, default=BOOKED, max_length=2)
+    child = models.DecimalField(decimal_places=0, max_digits=2, blank=True)
+    adult = models.DecimalField(decimal_places=0, max_digits=2, blank=True)
+    senior = models.DecimalField(decimal_places=0, max_digits=2, blank=True)
+    isic = models.DecimalField(decimal_places=0, max_digits=2, blank=True)
+
 
     def __str__(self):
         return self.email

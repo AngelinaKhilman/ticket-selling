@@ -16,7 +16,23 @@
 
     </thead>
 
-    {% for row in bus_list %}
+    {% for row in bus_list1 %}
+    <tr>
+        <td>{{row.id }}</td>
+        <td>{{row.bus_name}}</td>
+        <td>{{row.source}}</td>
+        <td>{{row.dest}}</td>
+        <td>{{row.nos}}</td>
+        <td>{{row.rem}}</td>
+        <td>{{row.price}}</td>
+        <td>{{row.date}}</td>
+        <td>{{row.time}}</td>
+
+
+    </tr>
+    {% endfor %}
+
+    {% for row in bus_list2 %}
     <tr>
         <td>{{row.id }}</td>
         <td>{{row.bus_name}}</td>
@@ -41,13 +57,6 @@
             <input name='bus_id' class="form-control" type="number" id="example-email-input">
         </div>
     </div>
-    <div class="col=auto">
-        <label for="example-email-input" class="col-2 col-form-label">Number of seats</label>
-        <div class="col-5">
-            <input name='no_seats' class="form-control" type="number">
-        </div>
-    </div>
-    <br>
     <br>
     <div class="pull-right">
         <button type="submit" class="btn btn-primary float-left">Book bus</button>

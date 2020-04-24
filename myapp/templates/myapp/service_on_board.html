@@ -1,0 +1,53 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Bootstrap 4 - Создание адаптивной галереи изображений с помощью сетки</title>
+    <!-- Bootstrap CSS -->
+    <link href="путь_до/bootstrap.min.css" rel="stylesheet">
+    <!-- fancyBox3 CSS -->
+    <link href="путь_до/jquery.fancybox.min.css" rel="stylesheet">
+    <style>
+        .thumb img {
+            -webkit-filter: grayscale(0);
+            filter: none;
+            border-radius: 5px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 5px;
+            width: 190px;
+            height: 130px;
+        }
+
+        .thumb img:hover {
+            -webkit-filter: grayscale(1);
+            filter: grayscale(1);
+        }
+
+        .thumb {
+            padding: 5px;
+        }
+
+    </style>
+</head>
+<body style=" text-align: center">
+
+<h7 style="color: #000000; font-size: 30pt; font-family: Helvetica, sans-serif; padding-top: 20px; margin: auto">
+    Service on board of the bus
+</h7>
+
+
+<!-- jQuery -->
+<script src="путь_до/jquery-3.2.1.min.js"></script>
+<!-- Popper -->
+<script src="путь_до/popper.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="путь_до/bootstrap.min.js"></script>
+<!-- fancyBox -->
+<script src="путь_до/jquery.fancybox.min.js"></script>
+</body>
+</html>
+{% endblock %}
