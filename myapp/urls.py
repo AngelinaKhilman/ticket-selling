@@ -16,6 +16,7 @@ urlpatterns = [
     #path('seepassportdata', views.see_passport_data, 'seepassportdata'),
     path('bookings', views.bookings, name="bookings"),
     path('cancellings', views.cancellings, name="cancellings"),
+    path('delete_booking', views.delete_booking, name='delete_booking'),
     path('seebookings', views.seebookings, name="seebookings"),
     path('signup', views.signup, name="signup"),
     path('signin', views.signin, name="signin"),

@@ -55,11 +55,11 @@ a{
         text-transform: uppercase;
 
 }
-a:hover {
+li a:hover {
     color: #FFFFFF;
      padding: 3px 0;
 	margin-left:5px;
-	font-weight:700;/* Цвет ссылки */
+	font-weight:700;
    }
 
 

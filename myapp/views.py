@@ -19,12 +19,13 @@ child = 0
 adult = 0
 senior = 0
 isic = 0
+round_or_one_flag = 0
 
 def home(request):
-    if request.user.is_authenticated:
+    #if request.user.is_authenticated:
         return render(request, 'myapp/home.html')
-    else:
-        return render(request, 'myapp/signin.html')
+    #else:
+        #return render(request, 'myapp/signin.html')
 
 def contacts(request):
     return render(request, 'myapp/contacts.html')
@@ -64,59 +65,41 @@ def null_validation(value):
     else:
         return 0
 
-@login_required(login_url='signin')
+
 def findbus(request):
     context = {}
     if request.method == 'POST':
-        global number_of_seats, adult, senior, isic, child
-        radio = request.POST.get("returning", None)
+        global number_of_seats, adult, senior, isic, child, round_or_one_flag
+        radio = request.POST.get("trip_type", None)
+        source_r = request.POST.get('source')
+        dest_r = request.POST.get('destination')
+        date_r = request.POST.get('date')
+        adult_r = request.POST.get('adult')
+        adult_r = null_validation(adult_r)
+        senior_r = request.POST.get('senior')
+        senior_r = null_validation(senior_r)
+        child_r = request.POST.get('child')
+        child_r = null_validation(child_r)
+        isic_r = request.POST.get('isic')
+        isic_r = null_validation(isic_r)
+        adult = adult_r
+        senior = senior_r
+        isic = isic_r
+        child = child_r
+        number_of_seats = adult_r + senior_r + child_r + isic_r
+        bus_list_from = Bus.objects.filter(source=source_r, dest=dest_r, date=date_r, rem__gte=number_of_seats)
         if radio in ['0']:
-            source_r = request.POST.get('source')
-            dest_r = request.POST.get('destination')
-            date_r = request.POST.get('date')
-            adult_r = request.POST.get('adult')
-            adult_r = null_validation(adult_r)
-            senior_r = request.POST.get('senior')
-            senior_r = null_validation(senior_r)
-            child_r = request.POST.get('child')
-            child_r = null_validation(child_r)
-            isic_r = request.POST.get('isic')
-            isic_r = null_validation(isic_r)
-            adult = adult_r
-            senior = senior_r
-            isic = isic_r
-            child = child_r
-            bus_list = []
-            number_of_seats = adult_r + senior_r + child_r + isic_r
-            bus_list1 = Bus.objects.filter(source=source_r, dest=dest_r, date=date_r, rem__gte=number_of_seats)
-            if bus_list1:
+            if bus_list_from:
                 return render(request, 'myapp/list.html', locals())
             else:
                 context["error"] = "Sorry no buses availiable"
                 return render(request, 'myapp/home.html', context)
 
         if radio in ['1']:
-            source_r = request.POST.get('source')
-            dest_r = request.POST.get('destination')
-            date_r = request.POST.get('date')
-            adult_r = request.POST.get('adult')
-            adult_r = null_validation(adult_r)
-            senior_r = request.POST.get('senior')
-            senior_r = null_validation(senior_r)
-            child_r = request.POST.get('child')
-            child_r = null_validation(child_r)
-            isic_r = request.POST.get('isic')
-            isic_r = null_validation(isic_r)
-            adult = adult_r
-            senior = senior_r
-            isic = isic_r
-            child = child_r
+            round_or_one_flag = 1
             date_return_r = request.POST.get('date_return')
-            bus_list = []
-            number_of_seats = adult_r + senior_r + child_r + isic_r
-            bus_list1 = Bus.objects.filter(source=source_r, dest=dest_r, date=date_r, rem__gte=number_of_seats)
-            bus_list2 = Bus.objects.filter(source=dest_r, dest=source_r, date=date_return_r, rem__gte=number_of_seats)
-            if bus_list1 and bus_list2:
+            bus_list_to = Bus.objects.filter(source=dest_r, dest=source_r, date=date_return_r, rem__gte=number_of_seats)
+            if bus_list_from and bus_list_to:
                 return render(request, 'myapp/list.html', locals())
             else:
                 context["error"] = "Sorry no buses availiable"
@@ -161,43 +144,82 @@ def passportdata(request, new={}):
 
 @login_required(login_url='signin')
 def bookings(request):
+    global round_or_one_flag
     context = {}
     if request.method == 'POST':
-        id_r = request.POST.get('bus_id')
+        id_r = request.POST.get('button')
         seats_r = number_of_seats
         adult_r = adult
         senior_r = senior
         isic_r = isic
         child_r = child
-        bus = Bus.objects.get(id=id_r)
-        if bus:
-            if bus.rem > int(seats_r):
-                name_r = bus.bus_name
-                cost = adult_r * bus.price + senior_r * Decimal('0.9') * bus.price + isic_r * Decimal('0.9') * bus.price + child_r * Decimal('0.8') * bus.price
-                source_r = bus.source
-                dest_r = bus.dest
-                nos_r = Decimal(bus.nos)
-                price_r = bus.price
-                date_r = bus.date
-                time_r = bus.time
-                username_r = request.user.username
-                email_r = request.user.email
-                userid_r = request.user.id
-                uniccode_r = uuid.uuid1()
-                rem_r = bus.rem - seats_r
-                Bus.objects.filter(id=id_r).update(rem=rem_r)
-                book = Book.objects.create(name=username_r, email=email_r, userid=userid_r, bus_name=name_r,
+        bus1 = Bus.objects.get(id=id_r)
+        if bus1:
+            name_r = bus1.bus_name
+            cost = adult_r * bus1.price + senior_r * Decimal('0.9') * bus1.price + isic_r * Decimal('0.9') * bus1.price + child_r * Decimal('0.8') * bus1.price
+            source_r = bus1.source
+            dest_r = bus1.dest
+            nos_r = Decimal(bus1.nos)
+            price_r = bus1.price
+            date_r = bus1.date
+            time_r = bus1.time
+            username_r = request.user.username
+            email_r = request.user.email
+            userid_r = request.user.id
+            uniccode_r = uuid.uuid1()
+            rem_r = bus1.rem - seats_r
+            Bus.objects.filter(id=id_r).update(rem=rem_r)
+            book = Book.objects.create(name=username_r, email=email_r, userid=userid_r, bus_name=name_r,
                                            source=source_r, busid=id_r,
                                            dest=dest_r, price=cost, nos=seats_r, date=date_r, time=time_r,
                                            uniccode=uniccode_r, status='BOOKED', adult=adult_r, child=child_r, senior=senior_r, isic=isic_r)
+            print('------------book id-----------', book.id)
+
+            if round_or_one_flag == 1:
+                round_or_one_flag = 0
+                id_r = request.POST.get('bus_id')
+                bus2 = Bus.objects.get(id=id_r)
+                name_r = bus2.bus_name
+                cost = adult_r * bus2.price + senior_r * Decimal('0.9') * bus2.price + isic_r * Decimal(
+                    '0.9') * bus2.price + child_r * Decimal('0.8') * bus2.price
+                source_r = bus2.source
+                dest_r = bus2.dest
+                nos_r = Decimal(bus2.nos)
+                price_r = bus2.price
+                date_r = bus2.date
+                time_r = bus2.time
+                uniccode_r = uuid.uuid1()
+                rem_r = bus2.rem - seats_r
+                Bus.objects.filter(id=id_r).update(rem=rem_r)
+                book2 = Book.objects.create(name=username_r, email=email_r, userid=userid_r, bus_name=name_r,
+                                           source=source_r, busid=id_r,
+                                           dest=dest_r, price=cost, nos=seats_r, date=date_r, time=time_r,
+                                           uniccode=uniccode_r, status='BOOKED', adult=adult_r, child=child_r,
+                                           senior=senior_r, isic=isic_r)
                 print('------------book id-----------', book.id)
-                # book.save()
 
-                return render(request, 'myapp/bookings.html', locals())
-            else:
-                context["error"] = "Sorry select fewer number of seats"
-                return render(request, 'myapp/findbus.html', context)
+            return render(request, 'myapp/bookings.html', locals())
 
+
+
+    else:
+        return render(request, 'myapp/findbus.html')
+
+@login_required(login_url='signin')
+def delete_booking(request):
+    context = {}
+    if request.method == 'POST':
+
+        id_r = request.POST.get('booking_id')
+        booking = Book.objects.get(uniccode=id_r)
+        #seats_r = int(request.POST.get('no_seats'))
+
+        try:
+            booking.delete()
+            return redirect(seebookings)
+        except Book.DoesNotExist:
+            context["error"] = "can't delete"
+            return render(request, 'myapp/error.html', context)
     else:
         return render(request, 'myapp/findbus.html')
 
@@ -226,7 +248,7 @@ def cancellings(request):
 
 
 @login_required(login_url='signin')
-def seebookings(request,new={}):
+def seebookings(request):
     context = {}
     id_r = request.user.id
     book_list = Book.objects.filter(userid=id_r)

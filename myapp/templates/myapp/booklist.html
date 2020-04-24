@@ -1,59 +1,89 @@
 {% extends 'myapp/base.html' %}
 {% block content %}
 <h3>{{msg}}</h3>
-<h2>List of buses</h2>
-<table class="table table-striped">
-    <thead>
-    <td>BOOKING ID</td>
-    <td>USER NAME</td>
-    <td>BUS NAME</td>
-    <td>SOURCE</td>
-    <td>DESTINATION</td>
-    <td>NUM OF SEATS</td>
-    <td>PRICE</td>
-    <td>DATE</td>
-    <td>TIME</td>
-    <td>STATUS</td>
+<style type="text/css">
+    .panel-default {
+    border-color: #ddd;
 
 
-    </thead>
+}
+.panel {
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    border: 1px solid transparent;
+    border-color: #ccc;
+    -webkit-border-radius: 10px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    padding: 15px;
+}
 
+
+</style>
+<table class="table">
     {% for row in book_list %}
     <tr>
-        <td>{{row.id}}</td>
-        <td>{{row.name}}</td>
-        <td>{{row.bus_name}}</td>
-        <td>{{row.source}}</td>
-        <td>{{row.dest}}</td>
-        <td>{{row.nos}}</td>
-        <td>{{row.price}}</td>
-        <td>{{row.date}}</td>
-        <td>{{row.time}}</td>
-        <td>{{row.status}}</td>
+        <td style="border: 0px">
+            <div class="panel panel-default">
+                <div class="row" style="align-items: center">
+                    <div class="col-xs-6 col-sm-3 origin">
+                        <h4 class="caption">Departure</h4>
+                        <div class="stop">{{row.source}}</div>
+                        <div class="time">{{row.time }}</div>
+                        <div class="date">{{row.date}}</div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 origin">
+                        <h4 class="caption">Arrival</h4>
+                        <div class="stop">{{row.dest}}</div>
+                        <div class="time">{{row.time }}</div>
+                        <div class="date">{{row.date}}</div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 origin">
+                        <h4 class="caption">Arrival</h4>
+                        <div class="stop">{{row.status}}</div>
+                        <div class="time">{{row.time }}</div>
+                        <div class="date">{{row.date}}</div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 origin">
+                        {% if row.status == "BOOKED" %}
+                        <form action="{% url 'cancellings' %}" method="post">
+                            {% csrf_token %}
+                            <div class="pull-right">
 
+                                <button value="{{row.id}}" name="bus_id" type="submit"
+                                        class="btn btn-primary float-left"
+                                        style="background: #FF8500; border-color: #FF8500">Cancel booking
+                                </button>
+
+                            </div>
+                            {{error}}
+
+                        </form>
+                        {% else %}
+                        <form action="{% url 'delete_booking' %}" method="post">
+                            {% csrf_token %}
+                            <div class="pull-right">
+
+                                <button value="{{row.uniccode}}" name="booking_id" type="submit"
+                                        class="btn btn-primary float-left"
+                                        style="background: #FF8500; border-color: #FF8500">Delete booking
+                                </button>
+
+                            </div>
+                            {{error}}
+
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </td>
 
     </tr>
     {% endfor %}
 </table>
-<form action="{% url 'cancellings' %}" method="post">
-    <h3>Choose bus to book</h3>
-    {% csrf_token %}
-    <div class="col-auto">
-        <label for="example-email-input" class="col-2 col-form-label">Bus ID</label>
-        <div class="col-5">
-            <input name='bus_id' class="form-control" type="number" id="example-email-input">
-        </div>
-    </div>
-
-    <br>
-    <br>
-    <div class="pull-right">
-        <button type="submit" class="btn btn-primary float-left">Cancel bus</button>
-    </div>
-
-
-    {{error}}
-
-</form>
 
 {% endblock %}
