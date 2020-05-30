@@ -22,38 +22,61 @@
 }
 
 
+
 </style>
 <table class="table">
-    {% for row in book_list %}
+    {% for col, row_list in book_list.items %}
     <tr>
         <td style="border: 0px">
             <div class="panel panel-default">
-                <div class="row" style="align-items: center">
+
+                <div class="row" style="">
                     <div class="col-xs-6 col-sm-3 origin">
                         <h4 class="caption">Departure</h4>
-                        <div class="stop">{{row.source}}</div>
-                        <div class="time">{{row.time }}</div>
-                        <div class="date">{{row.date}}</div>
+                        {% for row in row_list %}
+                        <div class="stop">{{row.0.bus.source}}</div>
+                        <div class="time">{{row.0.bus.time}}</div>
+                        <div class="date" style="padding-bottom: 2%">{{row.0.bus.date}}</div>
+                        {% endfor %}
                     </div>
                     <div class="col-xs-6 col-sm-3 origin">
+
                         <h4 class="caption">Arrival</h4>
-                        <div class="stop">{{row.dest}}</div>
-                        <div class="time">{{row.time }}</div>
-                        <div class="date">{{row.date}}</div>
+                        {% for row in row_list %}
+                        <div class="stop">{{row.0.bus.dest}}</div>
+                        <div class="time">{{row.1|time:"P"}}</div>
+                        <div class="date" style="padding-bottom: 2%">{{row.1|date:"N j, o,"}}</div>
+                        {% endfor %}
                     </div>
                     <div class="col-xs-6 col-sm-3 origin">
-                        <h4 class="caption">Arrival</h4>
-                        <div class="stop">{{row.status}}</div>
-                        <div class="time">{{row.time }}</div>
-                        <div class="date">{{row.date}}</div>
+                        <h4 class="caption">Passengers</h4>
+                        {% for row in row_list %}
+                        {% if  forloop.first %}
+                        {% for i in row.0.passenger_set.all %}
+                        <div class="time">{{i.name}} {{i.last_name}}</div>
+
+                        {% endfor %}
+                        <form action="{% url 'pdf' %}" method="post">
+                            {% csrf_token %}
+                            <div class="pull-right">
+                                <input type="hidden" name="doc" value="{{row.0.uniccode}}" style="border: 0px; background: #FFFFFF">
+                                <input type="submit" name="doc2" value="ticket.pdf" style="border: 0px; background: #FFFFFF; color: blue">
+                            </div>
+                            {{error}}
+
+                        </form>
+                        {% endif %}
+                        {% endfor %}
                     </div>
-                    <div class="col-xs-6 col-sm-3 origin">
-                        {% if row.status == "BOOKED" %}
+                    <div class="col-xs-6 col-sm-3 origin" style="margin: auto">
+                        {% for row in row_list %}
+                        {% if  forloop.first %}
+                        {% if row.0.status == "BOOKED" %}
                         <form action="{% url 'cancellings' %}" method="post">
                             {% csrf_token %}
                             <div class="pull-right">
 
-                                <button value="{{row.id}}" name="bus_id" type="submit"
+                                <button value="{{row.0.uniccode}}" name="bus_id" type="submit"
                                         class="btn btn-primary float-left"
                                         style="background: #FF8500; border-color: #FF8500">Cancel booking
                                 </button>
@@ -67,7 +90,7 @@
                             {% csrf_token %}
                             <div class="pull-right">
 
-                                <button value="{{row.uniccode}}" name="booking_id" type="submit"
+                                <button value="{{row.0.uniccode}}" name="booking_id" type="submit"
                                         class="btn btn-primary float-left"
                                         style="background: #FF8500; border-color: #FF8500">Delete booking
                                 </button>
@@ -77,8 +100,11 @@
 
                         </form>
                         {% endif %}
+                        {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
+
             </div>
         </td>
 

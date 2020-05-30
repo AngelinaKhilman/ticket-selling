@@ -1,9 +1,39 @@
 {% extends 'myapp/base.html' %}
 {% block content %}
+<head>
+    <style>
+        label{
+        color: black;
+        font-family: Helvetica, sans-serif;
+        }
+          .form-control{
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+
+
+
+  -webkit-border-radius: 30px;
+  transition: 0.5s;
+  outline: none;
+
+}
+h2{
+color: #000000;
+font-size: 30pt;
+font-family: Helvetica, sans-serif;
+padding-top: 20px;
+margin: auto;
+text-align: center;
+padding-bottom: 10%;
+padding-top: 10%;
+}
+
+    </style>
+</head>
 <div class="container">
-    <h2>Welcome to homepage</h2>
         <div class="row">
-            <div class="col-sm-6 mx-auto" style="margin-top: 70px">
+            <div class="col-sm-6 mx-auto" style="">
                 <h2>Sign in</h2>
 
                 <form action="{% url 'signin' %}" method="post">
@@ -20,8 +50,8 @@
                             <input name='password' class="form-control" type="password">
                         </div>
                     </div>
-                    <div class="pull-right">
-                        <button type="Submit" class="btn btn-primary float-right">Sign in</button>
+                    <div class="pull-right" style="text-align: center">
+                        <button type="Submit" class="btn btn-primary" style="background: #FF8500; border-color: #FF8500">Sign in</button>
                     </div>
 
                 </form>

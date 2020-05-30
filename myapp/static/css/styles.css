@@ -19,9 +19,13 @@ body {
     background-color: #024C68;
     width: 100%;
     height: 55px !important;
+    position:relative;
 
 
 
+}
+.navbar-brand{
+position:absolute;
 }
 .dropdown-menu{
  background-color: #024C68;

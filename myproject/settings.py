@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'grappelli',
+    #'send_email.apps.SendEmailConfig',
+    'mathfilters',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -115,8 +117,25 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'angelinakhilman@gmail.com'
+EMAIL_HOST_PASSWORD = '20Xilmanangelina14'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+#YANDEX_MONEY_SCID = 123
+#YANDEX_MONEY_SHOP_ID = 456
+#YANDEX_MONEY_SHOP_PASSWORD = 'password'
+#YANDEX_MONEY_DEBUG = DEBUG
+#YANDEX_MONEY_FAIL_URL = 'http://example.com/fail-payment/'
+#YANDEX_MONEY_SUCCESS_URL = 'http://example.com/success-payment/'

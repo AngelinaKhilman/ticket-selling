@@ -1,0 +1,110 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <style>
+        .form-control:focus{
+  border: 1px solid #2F8FB3;
+}
+
+.form-control{
+ width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+
+
+
+  -webkit-border-radius: 30px;
+  transition: 0.5s;
+  outline: none;
+
+}
+
+.form-group{
+width: 100%;
+justify-content: center;
+margin: auto;
+margin-bottom: 10px;
+}
+p{
+font-size: 26pt;
+margin: auto;
+}
+
+
+
+
+    </style>
+</head>
+<body style="">
+<div class="container33" style="width: 60%">
+    <form action="{% url 'bookings' %}" method="post">
+        {% csrf_token %}
+        {% for i in list_smp %}
+        <div class="row"
+             style="border: 5px solid #FF8500; margin-bottom: 5%; -webkit-border-radius: 30px; transition: 0.5s; outline: none; margin-left: 5%; margin-top: 5%">
+            <div class="col-md-6" style="">
+                <div class="form-group row ">
+                    <div class="col-10">
+                        <p style="color: black"> Passanger {{i}} </p>
+                    </div>
+                    <div class="col-10">
+                        <input name='name{{i}}' class="form-control" type="text" id=""
+                               placeholder="First name: ">
+                    </div>
+                    <div class="col-10">
+                        <input name='lastname{{i}}' class="form-control" type="text" id=""
+                               placeholder="Last name: ">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" style="">
+                <div class="form-group row ">
+                    <div class="col-10">
+                        <input name='status{{i}}' class="form-control" type="text" id="example-email-input"
+                               placeholder="Status: ">
+                    </div>
+                    <div class="col-10">
+                        <input name='email{{i}}' class="form-control" type="text" id=""
+                               placeholder="E-mail: ">
+                    </div>
+                    <div class="col-10">
+                        <input name='phone{{i}}' class="form-control" type="text" id=""
+                               placeholder="Phone: ">
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="pull-right" style="width: 100%; padding-bottom: 5%">
+            <button value="{{id_r}}" name="button" type="submit" class="btn btn-primary d-block mx-auto"
+                    style="width: 150px; background: #FF8500; border-color: #FF8500; margin-bottom: 2%;" src="https://money.yandex.ru/quickpay/button-widget?targets=%D0%9E%D0%BF%D0%BB%D0%B0%D1%82%D0%B0%20%D0%B1%D0%B8%D0%BB%D0%B5%D1%82%D0%B0&default-sum=240.00&button-text=11&yamoney-payment-type=on&button-size=m&button-color=orange&successURL=&quickpay=sma>ll&account=4100115225364953&">
+                Buy
+            </button>
+
+            <script src="https://kassa.yandex.ru/checkout-ui/v2.js"></script>
+
+            <!--HTML-элемент, в котором будет отображаться платежная форма-->
+            <div id="payment-form"></div>
+
+            <script>
+//Инициализация виджета. Все параметры обязательные.
+const checkout = new window.YandexCheckout({
+    confirmation_token: 'confirmation-token', //Токен, который перед проведением оплаты нужно получить от Яндекс.Кассы
+    return_url: 'https://merchant.site', //Ссылка на страницу завершения оплаты
+    error_callback(error) {
+        //Обработка ошибок инициализации
+    }
+});
+
+//Отображение платежной формы в контейнере
+checkout.render('payment-form');
+
+            </script>
+
+        </div>
+    </form>
+</div>
+</body>
+
+{% endblock %}

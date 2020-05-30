@@ -1,0 +1,122 @@
+{% extends 'myapp/base.html' %}
+{%load static%}
+{% block content %}
+
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+<body style="background-color: #024C68">
+<div class="container33">
+    <h1 align="center" style="color: #FFFFFF; font-family: 'Crimson Text', serif">Search for bus tickets</h1>
+    <form action="{% url 'findbus' %}" method="post">
+        {% csrf_token %}
+        <div class="row top-cover" style="width: 60%; margin-right: auto; margin-bottom: 2%;padding-left: 14.5%;">
+            <div class="row top-cover" style="margin: auto">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input onchange="changeTripType(this)" type="radio" class="form-check-input" name="trip_type" id="one-way-radio"
+                               value="0" checked> One way
+                    </label>
+                </div>
+            </div>
+            <div class="row top-cover" style="margin-right: auto">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input onchange="changeTripType(this)" type="radio" class="form-check-input" name="trip_type" id="roundtrip-radio"
+                               value="1">Roundtrip
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container3">
+
+
+            <div class="row top-cover" style="width: 60%; margin: auto">
+
+                <div class="col col-md-6 mx-auto">
+
+
+                    <div class="form-group row ">
+
+                        <div class="col-10">
+                            <input name='source' class="form-control" type="text" id="example-email-input" value="Minsk"
+                                   placeholder="From: ">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-10">
+                            <input name='date' class="form-control" type="text" onfocusin="(this.type='date')"
+                                   onfocusout="(this.type='text')" placeholder="Departure date: ">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+
+                        <div class="col-10">
+                            <input name='adult' class="form-control" type="text" placeholder="Adults: ">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+
+                        <div class="col-10">
+                            <input name='isic' class="form-control" type="text" placeholder="ISIC: ">
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col col-md-6 mx-auto">
+
+                    <div class="form-group row ">
+
+                        <div class="col-10">
+                            <input name='destination' class="form-control" type="text" id="example-email-input" value="Kiev"
+                                   placeholder="To: ">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-10">
+                            <input id='return-date-input' name='date_return' class="form-control" type="text"
+                                   onfocusin="(this.type='date')"
+                                   onfocusout="(this.type='text')" placeholder="Return date: " disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+
+                        <div class="col-10">
+                            <input name='child' class="form-control" type="text" placeholder="Children: ">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+
+                        <div class="col-10">
+                            <input name='senior' class="form-control" type="text" placeholder="Seniors: ">
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="pull-right" style="width: 100%">
+                    <button type="submit" class="btn btn-primary d-block mx-auto"
+                            style="width: 200px; background: #FF8500; border-color: #FF8500">
+                        Find
+                        ticket
+                    </button>
+                </div>
+                {{error}}
+            </div>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    const returnDateInput = document.getElementById('return-date-input');
+
+    function changeTripType(currentRadio) {
+        returnDateInput.disabled = currentRadio.id === 'one-way-radio';
+    }
+
+</script>
+</body>
+
+{% endblock %}
+

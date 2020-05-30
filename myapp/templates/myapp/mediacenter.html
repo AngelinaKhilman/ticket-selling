@@ -1,10 +1,121 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        p{
+        color: #000000;
+        font-size: 15pt;
+        font-family: Helvetica, sans-serif;
+        }
+
+
+
+
+
+
+    </style>
 </head>
 <body>
+<div style="text-align: center; padding-top: 2%">
+    <h7 style="color: #000000; font-size: 30pt; font-family: Helvetica, sans-serif; padding-top: 20px; margin: auto">
+        MEDIACENTER
+    </h7>
 
+</div>
+<div style="text-align: center; padding-top: 2%">
+    <img class="img-fluid" src="{% static 'mysite/images/mediacenter.jpg' %}">
+    <img class="img-fluid" src="{% static 'mysite/images/mediacenter2.jpg' %}">
+</div>
+<div style="text-align: center">
+    <div style="width: 75%; margin: auto; text-align: left; padding-bottom: 3%; padding-top: 3%">
+        <p>
+            Traveling by BELBUS is a relaxing, stress-free and entertaining way to get to your destination. Lean back
+            and relax while browsing trough the many possibilities our Media Center offers. Get swept up into a movie,
+            relax with our diverse music collection, surf the web or play classic games &nbsp;- all free of charge.&nbsp;
+        </p>
+        <p>
+            Time flies when you're having fun and you won't even notice the moment you'll reach your destination - we
+            can guarantee you that!
+        </p>
+        <hr style="background-color: #ccc">
+    </div>
+
+    <div style="width: 75%; margin: auto; text-align: center; padding-bottom: 3%; padding-top: 3%">
+        <img class="img-fluid" src="{% static 'mysite/images/wifi.png' %}" style="width: 80px; height: 80px">
+        <div style="margin:auto; text-align: center">
+            <p>WI-FI</p>
+        </div>
+    </div>
+    <div style="width: 75%; margin: auto; text-align: left; padding-bottom: 3%; padding-top: 3%">
+        <p>
+            Can't live without checking your social networks? Don't worry! While traveling with BELBUS you don't have
+            to miss out on any important update. Chat with your family or friends, do some work, shopping or browse your
+            favorite sites. On-board internet access is yours to use as much as you like, for as long as you like.
+        </p>
+    </div>
+    <div style="width: 75%; margin: auto; text-align: center; padding-bottom: 3%; padding-top: 3%">
+        <img class="img-fluid" src="{% static 'mysite/images/music.jpg' %}" style="width: 80px; height: 80px">
+        <div style="margin:auto; text-align: center">
+            <p>MUSIC</p>
+        </div>
+    </div>
+    <div style="width: 75%; margin: auto; text-align: left; padding-bottom: 3%; padding-top: 3%">
+        <p>
+            Sit back and relax while BELBUS song collection will takes you to another dimension. Choose between many
+            different type of genres - classics, jazz, rock and many more.
+
+
+        </p>
+    </div>
+    <div style="width: 75%; margin: auto; text-align: center; padding-bottom: 3%; padding-top: 3%">
+        <img class="img-fluid" src="{% static 'mysite/images/book.jpg' %}" style="width: 80px; height: 80px">
+        <div style="margin:auto; text-align: center">
+            <p>AUDIO BOOKS</p>
+        </div>
+    </div>
+    <div style="width: 75%; margin: auto; text-align: left; padding-bottom: 3%; padding-top: 3%">
+        <p>
+            Let your imagination run wild and free by listening to BELBUS collection of audio books! For our smallest
+            passengers we're offering fairy tales.
+
+
+        </p>
+    </div>
+    <div style="width: 75%; margin: auto; text-align: center; padding-bottom: 3%; padding-top: 3%">
+        <img class="img-fluid" src="{% static 'mysite/images/film.png' %}" style="width: 80px; height: 80px">
+        <div style="margin:auto; text-align: center">
+            <p>MOVIES</p>
+        </div>
+    </div>
+    <div style="width: 75%; margin: auto; text-align: left; padding-bottom: 3%; padding-top: 3%">
+        <p>
+            From romantic love stories to chilling horror films - everyone can find something to watch while traveling
+            with BELBUS. Need some laugh during the trip? Check out our movie library for hilarious comedies!
+
+
+        </p>
+    </div>
+    <div style="width: 75%; margin: auto; text-align: center; padding-bottom: 3%; padding-top: 3%">
+        <img class="img-fluid" src="{% static 'mysite/images/game.png' %}" style="width: 80px; height: 80px">
+        <div style="margin:auto; text-align: center">
+            <p>GAMES</p>
+        </div>
+    </div>
+    <div style="width: 75%; margin: auto; text-align: left; padding-bottom: 3%; padding-top: 3%">
+        <p>
+            Still don't have an idea how to play Minesweeper? Let's try to figure out the game together! BELBUS offers
+            a collection of classic games to take your mind off the road.
+
+
+        </p>
+    </div>
+
+</div>
 </body>
 </html>
+{% endblock %}

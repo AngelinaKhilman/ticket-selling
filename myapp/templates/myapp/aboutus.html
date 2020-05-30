@@ -1,11 +1,88 @@
 {% extends 'myapp/base.html' %}
+{% load static %}
 {% block content %}
+<head>
+    <style>
+        p{
+        color: #000000;
+        font-size: 15pt;
+        font-family: Helvetica, sans-serif;
+        }
+
+
+
+
+    </style>
+</head>
 <body>
-<h7 style="color: #000000; font-size: 30pt; font-family: Helvetica, sans-serif; padding-top: 20px; margin: auto">
-    Gallery
-</h7>
-<h1>
-    About BELBUS
-</h1>
+<div style="text-align: center; padding-top: 2%">
+    <h7 style="color: #000000; font-size: 30pt; font-family: Helvetica, sans-serif; padding-top: 20px; margin: auto">
+        ABOUT BELBUS
+    </h7>
+
+</div>
+<div style="text-align: center; padding-top: 2%">
+    <img class="img-fluid" src="{% static 'mysite/images/belbus.jpg' %}">
+    <img class="img-fluid" src="{% static 'mysite/images/about.jpg' %}">
+</div>
+<div style="text-align: center">
+    <div style="width: 80%; margin: auto; text-align: left; padding-bottom: 3%; padding-top: 3%">
+        <p>
+            BELBUS is one of the largest and most experienced coach operator in the Europa, which offers comfortable
+            travel to 20 countries and about 205 cities on a daily basis. We have become a leader in the market because
+            we know the roads we travel and we know what our passengers expect from us. It is better to describe our
+            company by defining our core values:
+        </p>
+        <hr style="background-color: #ccc">
+        <p style="font-size: 20pt">
+            Experience
+        </p>
+        <p>
+            BELARUS has been operating in the international market for coach and bus services for 20 years. By working
+            hard and continuously developing. Since its inception, BELBUS has become one of the largest
+            and most successful companies in BELARUS!
+        </p>
+        <hr style="background-color: #ccc">
+        <p style="font-size: 20pt">
+            Reliability
+        </p>
+        <p>
+            The success of BELBUS is based on the sense of responsibility for our passengers. The company prides
+            itself on its accuracy and transports passengers and their luggage in accordance with international
+            standards.
+
+            BELBUS lays special emphasis on the professionalism of its employees. The company selects only seasoned
+            and well trusted bus drivers to ensure passenger comfort and safety on all routes. BELBUS maintains its
+            coaches in accordance with European standards and continually expands the range of routes.
+        </p>
+        <hr style="background-color: #ccc">
+        <p style="font-size: 20pt">
+            Quality
+        </p>
+        <p>
+            We at BELBUS are aware that the company has managed to take its leading position thanks to making rapid
+            adjustments to meet the needs of our passengers.
+
+            The goal of BELBUS is to offer a full range of travel services! According to the wishes of our passengers,
+            the company is ready to help not only with coach transportation, but with visas, travel insurance, tour
+            organization, bus rental.By listening to customer requests, BELBUS reaches new heights!
+        </p>
+        <hr style="background-color: #ccc">
+        <p style="font-size: 20pt">
+            Comfort
+        </p>
+        <p>
+            BELBUS is characterized by the constant care of our passengers and their comfort. The company boasts a
+            specially developed quality management system, which allows us to fulfil customer requests during both
+            domestic and international trips.
+
+            Quality Internet is available for free on most BELBUS routes. During the long trips, specially trained
+            stewards will take care of passenger comfort.Pricing policy of the company allows to offer our customers
+            discount tickets on a regular basis.
+        </p>
+
+
+    </div>
+</div>
 </body>
 {% endblock %}

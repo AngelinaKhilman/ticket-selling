@@ -1,7 +1,6 @@
 {% extends 'myapp/base.html' %}
 {% block content %}
 <h3>{{msg}}</h3>
-<h2>List of buses</h2>
 <style type="text/css">
     .panel-default {
     border-color: #ddd;
@@ -22,55 +21,98 @@
     padding: 15px;
 }
 
+h1{
+font-size: 2rem;
+}
+button{
+width: 100%;
+}
+
+
+
+
 </style>
+
 <table class="table">
     {% if bus_list_to %}
-    {% for row in bus_list_from %}
-    {% for col in bus_list_to %}
+
     <tr>
         <td style="border: 0px">
+            <h1 style="text-align: center">DIRECT</h1>
             <div class="panel panel-default">
-                <div class="row" style="align-items: center">
-                    <div class="col-xs-6 col-sm-3 origin">
-                        <h4 class="caption">Departure</h4>
-                        <div class="stop">{{row.source}}</div>
-                        <div class="time">{{row.time }}</div>
-                        <div class="date">{{row.date}}</div>
-                        <h4 class="caption">Departure</h4>
-                        <div class="stop">{{col.source}}</div>
-                        <div class="time">{{col.time }}</div>
-                        <div class="date">{{col.date}}</div>
-                    </div>
-                    <div class="col-xs-6 col-sm-3 origin">
-                        <h4 class="caption">Arrival</h4>
-                        <div class="stop">{{row.dest}}</div>
-                        <div class="time">{{row.time }}</div>
-                        <div class="date">{{row.date}}</div>
+                <div class="row">
+                    <div class="col-md-10" style="margin: auto">
+                        <div class="row" style="padding-bottom: 2%">
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Departure</h4>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Arrival</h4>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Duration</h4>
+                            </div>
+                        </div>
+                        {% for row in combined_list %}
+                        <div class="row" style="padding-bottom: 2%">
+                            <div class="col-md-4" style="text-align: center">
+                                <div class="stop">{{row.0.source}}</div>
+                                <div class="time">{{row.0.date }}</div>
+                                <div class="date">{{row.0.time}}</div>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <div class="stop">{{row.0.dest}}</div>
+                                <div class="date">{{row.1}}</div>
+                                <div class="date">{{row.2}}</div>
 
-                        <h4 class="caption">Arrival</h4>
-                        <div class="stop">{{col.dest}}</div>
-                        <div class="time">{{col.time }}</div>
-                        <div class="date">{{col.date}}</div>
-                    </div>
-                    <div class="col-xs-6 col-sm-3 origin">
-                        <h4 class="caption">Arrival</h4>
-                        <div class="stop">{{row.dest}}</div>
-                        <div class="time">{{row.time }}</div>
-                        <div class="date">{{row.date}}</div>
+                            </div>
+                            {%if forloop.counter == 1 %}
+                            <div class="col-md-4" style="text-align: center; margin: auto">
+                                <div class="date">{{duration}}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                        <hr style="background-color: #ccc">
+                        <div class="row" style="padding-bottom: 2%">
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Departure</h4>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Arrival</h4>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Duration</h4>
+                            </div>
+                        </div>
+                        {% for row in combined_list2 %}
+                        <div class="row" style="padding-bottom: 2%">
+                            <div class="col-md-4" style="text-align: center">
+                                <div class="stop">{{row.0.source}}</div>
+                                <div class="time">{{row.0.date }}</div>
+                                <div class="date">{{row.0.time}}</div>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <div class="stop">{{row.0.dest}}</div>
+                                <div class="date">{{row.1}}</div>
+                                <div class="date">{{row.2}}</div>
 
-                        <h4 class="caption">Arrival</h4>
-                        <div class="stop">{{col.dest}}</div>
-                        <div class="time">{{col.time }}</div>
-                        <div class="date">{{col.date}}</div>
+                            </div>
+                            {%if forloop.counter == 1 %}
+                            <div class="col-md-4" style="text-align: center; margin: auto">
+                                <div class="date">{{duration2}}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
                     </div>
-                    <div class="col-xs-6 col-sm-3 origin">
-                        <form action="{% url 'bookings' %}" method="post">
+                    <div class="col-md-2" style="text-align: center; margin: auto">
+                        <form action="{% url 'data' %}" method="post" style="margin-top: 100%; margin-bottom: 100%">
                             {% csrf_token %}
-                            <input name='bus_id' type="hidden" value="{{col.id}}">
                             <div class="pull-right">
-                                <button value="{{row.id}}" name="button" type="submit"
-                                        class="btn btn-primary float-left"
-                                        style="background: #FF8500; border-color: #FF8500">{{row.price|add:col.price}}
+                                <button value="{{0}}" name="button" type="submit"
+                                        class="btn btn-primary"
+                                        style="background: #FF8500; border-color: #FF8500">{{cost2}} BYN
                                 </button>
                             </div>
                             {{error}}
@@ -78,45 +120,152 @@
                         </form>
                     </div>
                 </div>
-
             </div>
         </td>
-
     </tr>
-    {% endfor %}
-    {% endfor %}
+
+    <tr>
+        <td style="border: 0px">
+            <h1 style="text-align: center">CHEAPEST</h1>
+            <div class="panel panel-default">
+                <div class="row">
+                    <div class="col-md-10" style="margin: auto">
+                        <div class="row" style="padding-bottom: 2%">
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Departure</h4>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Arrival</h4>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Duration</h4>
+                            </div>
+                        </div>
+                        {% for row in combined_list_price %}
+                        <div class="row" style="padding-bottom: 2%">
+                            <div class="col-md-4" style="text-align: center">
+                                <div class="stop">{{row.0.source}}</div>
+                                <div class="time">{{row.0.date }}</div>
+                                <div class="date">{{row.0.time}}</div>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <div class="stop">{{row.0.dest}}</div>
+                                <div class="date">{{row.1}}</div>
+                                <div class="date">{{row.2}}</div>
+
+                            </div>
+                            {%if forloop.counter == 1 %}
+                            <div class="col-md-4" style="text-align: center; margin: auto">
+                                <div class="date">{{duration_price}}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                        <hr style="background-color: #ccc">
+                        <div class="row" style="padding-bottom: 2%">
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Departure</h4>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Arrival</h4>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Duration</h4>
+                            </div>
+                        </div>
+                        {% for row in combined_list2_price %}
+                        <div class="row" style="padding-bottom: 2%">
+                            <div class="col-md-4" style="text-align: center">
+                                <div class="stop">{{row.0.source}}</div>
+                                <div class="time">{{row.0.date }}</div>
+                                <div class="date">{{row.0.time}}</div>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <div class="stop">{{row.0.dest}}</div>
+                                <div class="date">{{row.1}}</div>
+                                <div class="date">{{row.2}}</div>
+
+                            </div>
+                            {%if forloop.counter == 1 %}
+                            <div class="col-md-4" style="text-align: center; margin: auto">
+                                <div class="date">{{duration2_price}}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-2" style="text-align: center; margin: auto">
+                        <form action="{% url 'data' %}" method="post" style="margin-top: 100%; margin-bottom: 100%">
+                            {% csrf_token %}
+                            <div class="pull-right">
+                                <button value="{{1}}" name="button" type="submit"
+                                        class="btn btn-primary"
+                                        style="background: #FF8500; border-color: #FF8500">{{cost2_price}} BYN
+                                </button>
+                            </div>
+                            {{error}}
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+
+
+
+
+
+
 
     {% else %}
-    {% for row in bus_list_from %}
+
     <tr>
         <td style="border: 0px">
+            <h1 style="text-align: center">DIRECT</h1>
             <div class="panel panel-default">
-                <div class="row" style="align-items: center">
-                    <div class="col-xs-6 col-sm-3 origin">
-                        <h4 class="caption">Departure</h4>
-                        <div class="stop">{{row.source}}</div>
-                        <div class="time">{{row.time }}</div>
-                        <div class="date">{{row.date}}</div>
+                <div class="row">
+                    <div class="col-md-10" style="margin: auto">
+                        <div class="row" style="padding-bottom: 2%">
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Departure</h4>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Arrival</h4>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Duration</h4>
+                            </div>
+                        </div>
+                        {% for row in combined_list %}
+                        <div class="row" style="padding-bottom: 2%">
+                            <div class="col-md-4" style="text-align: center">
+                                <div class="stop">{{row.0.source}}</div>
+                                <div class="time">{{row.0.date }}</div>
+                                <div class="date">{{row.0.time}}</div>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <div class="stop">{{row.0.dest}}</div>
+                                <div class="date">{{row.1}}</div>
+                                <div class="date">{{row.2}}</div>
+
+                            </div>
+                            {%if forloop.counter == 1 %}
+                            <div class="col-md-4" style="text-align: center; margin: auto">
+                                <div class="date">{{duration}}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
                     </div>
-                    <div class="col-xs-6 col-sm-3 origin">
-                        <h4 class="caption">Arrival</h4>
-                        <div class="stop">{{row.dest}}</div>
-                        <div class="time">{{row.time }}</div>
-                        <div class="date">{{row.date}}</div>
-                    </div>
-                    <div class="col-xs-6 col-sm-3 origin">
-                        <h4 class="caption">Arrival</h4>
-                        <div class="stop">{{row.dest}}</div>
-                        <div class="time">{{row.time }}</div>
-                        <div class="date">{{row.date}}</div>
-                    </div>
-                    <div class="col-xs-6 col-sm-3 origin">
-                        <form action="{% url 'bookings' %}" method="post">
+                    <div class="col-md-2" style="text-align: center; margin: auto">
+
+                        <form action="{% url 'data' %}" method="post" style="margin-top: 100%; margin-bottom: 100%">
                             {% csrf_token %}
                             <div class="pull-right">
-                                <button value="{{row.id}}" name="button" type="submit"
-                                        class="btn btn-primary float-left"
-                                        style="background: #FF8500; border-color: #FF8500">{{row.price}}
+                                <button value="{{2}}" name="button" type="submit"
+                                        class="btn btn-primary"
+                                        style="background: #FF8500; border-color: #FF8500">{{cost}} BYN
                                 </button>
                             </div>
                             {{error}}
@@ -127,7 +276,186 @@
             </div>
         </td>
     </tr>
-    {% endfor %}
+
+    <tr>
+        <td style="border: 0px">
+            <h1 style="text-align: center">CHEAPEST</h1>
+            <div class="panel panel-default">
+                <div class="row">
+                    <div class="col-md-10" style="margin: auto">
+                        <div class="row" style="padding-bottom: 2%">
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Departure</h4>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Arrival</h4>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Duration</h4>
+                            </div>
+                        </div>
+                        {% for row in combined_list_price %}
+                        <div class="row" style="padding-bottom: 2%">
+                            <div class="col-md-4" style="text-align: center">
+                                <div class="stop">{{row.0.source}}</div>
+                                <div class="time">{{row.0.date }}</div>
+                                <div class="date">{{row.0.time}}</div>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <div class="stop">{{row.0.dest}}</div>
+                                <div class="date">{{row.1}}</div>
+                                <div class="date">{{row.2}}</div>
+
+                            </div>
+                            {%if forloop.counter == 1 %}
+                            <div class="col-md-4" style="text-align: center; margin: auto">
+                                <div class="date">{{duration_price}}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-2" style="text-align: center; margin: auto">
+                        <form action="{% url 'data' %}" method="post" style="margin-top: 100%; margin-bottom: 100%">
+                            {% csrf_token %}
+                            <div class="pull-right">
+                                <button value="{{3}}" name="button" type="submit"
+                                        class="btn btn-primary"
+                                        style="background: #FF8500; border-color: #FF8500">{{cost_price}} BYN
+                                </button>
+                            </div>
+                            {{error}}
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+
+    {% endif %}
+
+        {% if one_stop %}
+    <tr>
+        <td style="border: 0px">
+            <h1 style="text-align: center">1 STOP</h1>
+            <div class="panel panel-default">
+                <div class="row">
+                    <div class="col-md-10" style="margin: auto">
+                        <div class="row" style="padding-bottom: 2%">
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Departure</h4>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Arrival</h4>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Duration</h4>
+                            </div>
+                        </div>
+                        {% for row in combined_list_one_stop %}
+                        <div class="row" style="padding-bottom: 2%">
+                            <div class="col-md-4" style="text-align: center">
+                                <div class="stop">{{row.0.source}}</div>
+                                <div class="time">{{row.0.date }}</div>
+                                <div class="date">{{row.0.time}}</div>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <div class="stop">{{row.0.dest}}</div>
+                                <div class="time">{{row.1}}</div>
+                                <div class="date">{{row.2}}</div>
+
+
+                            </div>
+                            {%if forloop.counter == 1 %}
+                            <div class="col-md-4" style="text-align: center; margin: auto">
+                                <div class="date">{{duration_one_stop}}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-2" style="text-align: center; margin: auto">
+
+                        <form action="{% url 'data' %}" method="post" style="margin-top: 100%; margin-bottom: 100%">
+                            {% csrf_token %}
+                            <div class="pull-right">
+                                <button value="{{4}}" name="button" type="submit"
+                                        class="btn btn-primary"
+                                        style="background: #FF8500; border-color: #FF8500">{{cost_one_stop}} BYN
+                                </button>
+                            </div>
+                            {{error}}
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+
+    {% endif %}
+
+
+    {% if two_stop %}
+    <tr>
+        <td style="border: 0px">
+            <h1 style="text-align: center">2 STOP</h1>
+            <div class="panel panel-default">
+                <div class="row">
+                    <div class="col-md-10" style="margin: auto">
+                        <div class="row" style="padding-bottom: 2%">
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Departure</h4>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Arrival</h4>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <h4 class="caption">Duration</h4>
+                            </div>
+                        </div>
+                        {% for row in combined_list_two_stop %}
+                        <div class="row" style="padding-bottom: 2%">
+                            <div class="col-md-4" style="text-align: center">
+                                <div class="stop">{{row.0.source}}</div>
+                                <div class="time">{{row.0.date }}</div>
+                                <div class="date">{{row.0.time}}</div>
+                            </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <div class="stop">{{row.0.dest}}</div>
+                                <div class="time">{{row.1}}</div>
+                                <div class="date">{{row.2}}</div>
+
+
+                            </div>
+                            {%if forloop.counter == 1 %}
+                            <div class="col-md-4" style="text-align: center; margin: auto">
+                                <div class="date">{{duration_two_stop}}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-2" style="text-align: center; margin: auto">
+
+                        <form action="{% url 'data' %}" method="post" style="margin-top: 100%; margin-bottom: 100%">
+                            {% csrf_token %}
+                            <div class="pull-right">
+                                <button value="{{5}}" name="button" type="submit"
+                                        class="btn btn-primary"
+                                        style="background: #FF8500; border-color: #FF8500">{{cost_two_stop}} BYN
+                                </button>
+                            </div>
+                            {{error}}
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+
     {% endif %}
 
 

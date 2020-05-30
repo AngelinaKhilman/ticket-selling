@@ -32,7 +32,7 @@
     </button>
 
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto" style="margin-left: 15%">
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
             </li>
@@ -43,15 +43,20 @@
                     Trip
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{% url 'seebookings' %}">See bookings</a>
-                    <a class="dropdown-item" href="{% url 'show_my_bus' %}">Show my bus</a>
+                    <a class="dropdown-item" href="{% url 'seebookings' %}" style="width: 90%">See bookings</a>
+                    <a class="dropdown-item" href="{% url 'show_my_bus' %}" style="width: 90%">Show my bus</a>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'passportdata' %}">Passport data</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'info' %}">Info</a>
+            
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Info
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'gallery' %}" style="width: 90%">Transportation of luggage</a>
+                    <a class="dropdown-item" href="{% url 'aboutus' %}" style="width: 90%">Terms and Conditions</a>
+                </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -59,10 +64,10 @@
                     About us
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'gallery' %}">Gallery</a>
-                    <a class="dropdown-item" href="{% url 'aboutus' %}">About BELBUS</a>
-                    <a class="dropdown-item" href="{% url 'mediacenter' %}">Media center</a>
-                    <a class="dropdown-item" href="{% url 'service_on_board' %}">Service on board of the bus</a>
+                    <a class="dropdown-item" href="{% url 'gallery' %}" style="width: 90%">Gallery</a>
+                    <a class="dropdown-item" href="{% url 'aboutus' %}" style="width: 90%">About BELBUS</a>
+                    <a class="dropdown-item" href="{% url 'mediacenter' %}" style="width: 90%">Media center</a>
+                    <a class="dropdown-item" href="{% url 'service_on_board' %}" style="width: 90%">Service on board of the bus</a>
                 </div>
             </li>
             </li>
@@ -94,11 +99,11 @@
             <div class="col-xs-12 col-sm-4 col-md-4">
                 <h5>Directions</h5>
                 <ul class="list-unstyled quick-links">
-                    <li><a href="javascript:void();">Minsk-Moscow</a></li>
-                    <li><a href="javascript:void();">Minsk-Warsaw</a></li>
-                    <li><a href="javascript:void();">Minsk-Saint Petersburg</a></li>
-                    <li><a href="javascript:void();">Minsk-Vilnius</a></li>
-                    <li><a href="javascript:void();">Minsk-Kiev</a></li>
+                    <li><a href="{% url 'home_minsk_moscow' %}">Minsk-Moscow</a></li>
+                    <li><a href="{% url 'home_minsk_warsaw' %}">Minsk-Warsaw</a></li>
+                    <li><a href="{% url 'home_minsk_saint_petersburg' %}">Minsk-Saint Petersburg</a></li>
+                    <li><a href="{% url 'home_minsk_vilnius' %}">Minsk-Vilnius</a></li>
+                    <li><a href="{% url 'home_minsk_kiev' %}">Minsk-Kiev</a></li>
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4">

@@ -10,35 +10,127 @@
     <link href="путь_до/bootstrap.min.css" rel="stylesheet">
     <!-- fancyBox3 CSS -->
     <link href="путь_до/jquery.fancybox.min.css" rel="stylesheet">
+
     <style>
-        .thumb img {
-            -webkit-filter: grayscale(0);
-            filter: none;
-            border-radius: 5px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            padding: 5px;
-            width: 190px;
-            height: 130px;
+        p{
+        color: #000000;
+        font-size: 15pt;
+        font-family: Helvetica, sans-serif;
         }
 
-        .thumb img:hover {
-            -webkit-filter: grayscale(1);
-            filter: grayscale(1);
-        }
 
-        .thumb {
-            padding: 5px;
-        }
+
+
+
+
+
+
+
+
 
     </style>
 </head>
 <body style=" text-align: center">
 
-<h7 style="color: #000000; font-size: 30pt; font-family: Helvetica, sans-serif; padding-top: 20px; margin: auto">
-    Service on board of the bus
-</h7>
+<div style="text-align: center; padding-top: 2%">
+    <h7 style="color: #000000; font-size: 30pt; font-family: Helvetica, sans-serif; padding-top: 20px; margin: auto">
+        SERVICE ON BOARD OF THE BUS
+    </h7>
 
+</div>
+
+<div style="text-align: center; padding-top: 2%">
+    <img class="img-fluid" src="{% static 'mysite/images/belbus.jpg' %}">
+    <img class="img-fluid" src="{% static 'mysite/images/about.jpg' %}">
+</div>
+<div style="text-align: center">
+    <div style="width: 80%; margin: auto; text-align: left; padding-bottom: 3%; padding-top: 3%">
+         <hr style="background-color: #ccc">
+        <p style="  font-size: 20pt">Depending on the bus equipment BELBUS offers
+            wide range of services :</p>
+        <div class="row" style="padding-bottom: 2%">
+            <div class="col-md-4" style="text-align: center">
+                <div class="row">
+                    <img class="img-fluid" src="{% static 'mysite/images/wifi.png' %}"
+                         style="width: 80px; height: 80px">
+                    <div style="margin-top: auto; margin-bottom: auto; padding-left: 1%; width: 20%">
+                        <p style="margin-bottom: 0px">WI-FI</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" style="text-align: center">
+                <div class="row">
+                    <img class="img-fluid" src="{% static 'mysite/images/game.png' %}"
+                         style="width: 80px; height: 80px">
+                    <div style="margin-top: auto; margin-bottom: auto; padding-left: 1%; width: 70%">
+                        <p style="margin-bottom: 0px">Personal media devices</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" style="text-align: center">
+                <div class="row">
+                    <img class="img-fluid" src="{% static 'mysite/images/food.png' %}"
+                         style="width: 80px; height: 80px">
+                    <div style="margin-top: auto; margin-bottom: auto; padding-left: 1%; width: 20%">
+                        <p style="margin-bottom: 0px">Food</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 2%">
+            <div class="col-md-4" style="text-align: center">
+                <div class="row">
+                    <img class="img-fluid" src="{% static 'mysite/images/cup.png' %}"
+                         style="width: 80px; height: 80px">
+                    <div style="margin-top: auto; margin-bottom: auto; padding-left: 1%; width: 20%">
+                        <p style="margin-bottom: 0px">Drinks</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" style="text-align: center">
+                <div class="row">
+                    <img class="img-fluid" src="{% static 'mysite/images/lag.png' %}"
+                         style="width: 80px; height: 80px">
+                    <div style="margin-top: auto; margin-bottom: auto; padding-left: 1%; width: 70%">
+                        <p style="margin-bottom: 0px">Transportation of luggage</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" style="text-align: center">
+                <div class="row">
+                    <img class="img-fluid" src="{% static 'mysite/images/wo.png' %}"
+                         style="width: 80px; height: 80px">
+                    <div style="margin-top: auto; margin-bottom: auto; padding-left: 1%; width: 20%">
+                        <p style="margin-bottom: 0px">Stewardess</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 2%">
+            <div class="col-md-4" style="text-align: center">
+                <div class="row">
+                    <img class="img-fluid" src="{% static 'mysite/images/wc.jpg' %}"
+                         style="width: 80px; height: 80px">
+                    <div style="margin-top: auto; margin-bottom: auto; padding-left: 1%; width: 20%">
+                        <p style="margin-bottom: 0px">WC</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" style="text-align: center">
+                <div class="row">
+
+
+                </div>
+            </div>
+            <div class="col-md-4" style="text-align: center">
+                <div class="row">
+
+                </div>
+            </div>
+        </div>
+         <hr style="background-color: #ccc">
+    </div>
+</div>
 
 <!-- jQuery -->
 <script src="путь_до/jquery-3.2.1.min.js"></script>

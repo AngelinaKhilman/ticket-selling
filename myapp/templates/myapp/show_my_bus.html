@@ -14,48 +14,150 @@
         crossorigin="anonymous"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-<body class="container">
+<head>
+    <style>
+    .form-control{
+ width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+
+
+
+  -webkit-border-radius: 30px;
+  transition: 0.5s;
+  outline: none;
+
+}
+    .panel-default {
+    border-color: #ddd;
+
+
+}
+.panel {
+
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-left: 2%;
+    margin-right: 5%;
+    border: 1px solid transparent;
+    border-color: #ccc;
+    -webkit-border-radius: 10px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    padding: 15px;
+}
+
+h4{
+color: black;
+}
+
+
+    </style>
+</head>
+<body>
 <form method="POST" action="{% url 'show_my_bus' %}">
     {% csrf_token %}
-    <p>
-        <label>uniccode</label><br>
-        <input type="text" name="uniccode"/>
-    </p>
+    <p style="color: #000000; font-size: 30pt; font-family: Helvetica, sans-serif; padding-top: 20px; margin-left: 2%">
+        FIND MY BUS</p>
 
-    <input type="submit" value="Сохранить">
+    <div class="row" style="margin-left: 1%; margin-top: 1%">
+
+        <div class="col-md-6" style="">
+
+
+            <div class="form-group row ">
+
+                <div class="col-10">
+                    <input name='uniccode' class="form-control" type="text" id="example-email-input"
+                           placeholder="Unique number: ">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="width: 100%; margin-left: 2%; margin-bottom: 5%">
+        <button type="submit" class="btn btn-primary d-block " value="Сохранить"
+                style="width: 200px; background: #FF8500; border-color: #FF8500">
+            Find
+            ticket
+        </button>
+    </div>
+
 </form>
 
 </body>
 
 {% if ticket %}
-
-<h3>{{msg}}</h3>
-<h2>bus</h2>
-<table class="table table-striped">
-    <thead>
-    <td>NAME</td>
-    <td>SOURCE</td>
-    <td>DEST</td>
-    <td>PRICE</td>
-    <td>DATE</td>
-    <td>TIME</td>
-    <td>NOS</td>
-
-    </thead>
-
-    {% for row in ticket %}
+<div class="panel panel-default">
+    {% for row, col in ticket.pairs %}
     <tr>
-        <td>{{row.bus_name}}</td>
-        <td>{{row.source}}</td>
-        <td>{{row.dest}}</td>
-        <td>{{row.price}}</td>
-        <td>{{row.date}}</td>
-        <td>{{row.time}}</td>
-        <td>{{row.nos}}</td>
+        <td style="border: 0px">
 
+            <div class="row">
+                <div class="col-md-10" style="margin: auto">
+                    <div class="row" style="padding-bottom: 2%">
+                        {% if forloop.first %}
+                        <div class="col-md-3" style="text-align: center">
+                            <h4 class="caption">Departure</h4>
+                        </div>
+                        <div class="col-md-3" style="text-align: center">
+                            <h4 class="caption">Arrival</h4>
+                        </div>
+                        <div class="col-md-3" style="text-align: center">
+                            <h4 class="caption">Passengers</h4>
+                        </div>
+                        <div class="col-md-3" style="text-align: center">
+                            <h4 class="caption">Document</h4>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="row" style="padding-bottom: 2%">
+                        <div class="col-md-3" style="text-align: center">
+                            <div class="stop" style="color: black">{{row.bus.source}}</div>
+                            <div class="time" style="color: black">{{row.bus.date }}</div>
+                            <div class="date" style="color: black">{{row.bus.time}}</div>
+                        </div>
+                        <div class="col-md-3" style="text-align: center">
+                            <div class="stop" style="color: black">{{row.bus.dest}}</div>
+                            <div class="date" style="color: black">{{col|date:"N j, o,"}}</div>
+                            <div class="date" style="color: black">{{col|time:"P"}}</div>
+
+                        </div>
+
+                        <div class="col-md-3" style="text-align: center">
+                            {% if forloop.first %}
+                            {% for i in row.passenger_set.all %}
+                            <div class="time" style="color: black">{{i.name}} {{i.last_name}}</div>
+
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-md-3" style="text-align: center">
+                             {% if forloop.first %}
+                            <form action="{% url 'pdf' %}" method="post">
+                            {% csrf_token %}
+                            <div class="pull-right">
+                                <input type="hidden" name="doc" value="{{row.uniccode}}" style="border: 0px; background: #FFFFFF">
+                                <input type="submit" name="doc2" value="ticket.pdf" style="border: 0px; background: #FFFFFF; color: blue">
+                            </div>
+                            {{error}}
+
+                        </form>
+                             {% endif %}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </td>
     </tr>
+
     {% endfor %}
-    {% endif %}
+</div>
+{% endif %}
 </table>
 
 
